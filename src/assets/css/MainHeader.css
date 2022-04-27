@@ -1,0 +1,42 @@
+.App {
+  text-align: center;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 7vh;
+  background-color: rgb(11, 11, 83);
+  color: #ffff;
+}
+nav a {
+  color: #ffff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 5px 15px;
+}
+nav .active {
+  background-color: rgb(47, 27, 230);
+}
+.nav-links {
+  width: 22%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+.navigate {
+  margin: 50px 0;
+}
+.navigate a {
+  margin-left: 10px;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 5px 15px;
+}
+.navigate .active {
+  background-color: rgb(226, 223, 255);
+}
+.search {
+  margin-top: 40px;
+}
