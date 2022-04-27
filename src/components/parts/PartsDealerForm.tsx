@@ -1,12 +1,10 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import Service from '../../domain/dealersCollection/Service';
+import { FormEvent, useState } from 'react';
+import Service from '../../domain/dealersCollection/DealersService';
 import Validation from '../../class/Validation';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import ToastNotify from '../../class/ToastNotify';
 
-toast.configure();
-export default function PartsFrom() {
+export default function PartsDealerForm() {
   // const arrayCaptions = ['Title', 'Address', 'Latitude', 'Longitude'];
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -14,22 +12,9 @@ export default function PartsFrom() {
   const [lat, setLatitude] = useState('');
   const [lng, setLongitude] = useState('');
 
-  const errorMessage = (message: any) => {
-    toast.error(message, {
-      position: toast.POSITION.TOP_LEFT,
-      autoClose: 2000,
-    });
-  };
-  const successMessage = (message: string) => {
-    toast.success(message, {
-      position: toast.POSITION.TOP_LEFT,
-      autoClose: 3000,
-    });
-  };
-
   const onSubmitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    let validateData = Validation.validationFields({
+    let validateData = Validation.validationFieldsAddDealer({
       title,
       address,
       lat,
@@ -37,27 +22,21 @@ export default function PartsFrom() {
     });
 
     if (typeof validateData !== 'object') {
-      errorMessage(validateData);
+      ToastNotify.errorMessage(validateData);
     } else {
-      // try {
-      const response = await Service.addDealer(validateData);
-      console.log(response);
-      // } catch (err) {
-      //   console.log(err);
-      // }
-
-      // successMessage('Success add dealer');
-      // setTitle('');
-      // setAddress('');
-      // setLatitude('');
-      // setLongitude('');
-      // navigate('/');
-
-      // .catch((err) => {
-      //   console.log(err);
-
-      //   // errorMessage('Error sending request');
-      // });
+      await Service.addDealer(validateData)
+        .then((response) => {
+          ToastNotify.successMessage(response.data.message);
+          setTitle('');
+          setAddress('');
+          setLatitude('');
+          setLongitude('');
+          navigate('/');
+        })
+        .catch((err) => {
+          console.log(err);
+          ToastNotify.errorMessage('Error sending request');
+        });
     }
   };
   return (

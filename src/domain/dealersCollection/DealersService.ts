@@ -1,6 +1,6 @@
-import Factory from './Factory';
-import Gateway from './Gateway';
-import Repository from './Repository';
+import Factory from './DealersFactory';
+import Gateway from './DealersGateway';
+import Repository from './DealersRepository';
 
 export default class Service {
   static getAll(page: number) {
@@ -10,6 +10,6 @@ export default class Service {
     return new Gateway().deleteDealer(id);
   }
   static addDealer(data: any) {
-    return new Repository(new Gateway(), new Factory()).addDealer(data);
+    return new Gateway().addDealer(data);
   }
 }

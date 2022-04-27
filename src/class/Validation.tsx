@@ -11,7 +11,7 @@ export default class Validation {
   static longitudeValidation(lng: string) {
     return /^-?\d+[.]+\d+$/.test(lng);
   }
-  static validationFields({ title, address, lat, lng }: Type) {
+  static validationFieldsAddDealer({ title, address, lat, lng }: Type) {
     if (
       title.length >= 5 &&
       address.length > 5 &&

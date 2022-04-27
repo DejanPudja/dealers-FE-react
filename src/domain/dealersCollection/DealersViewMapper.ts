@@ -1,4 +1,4 @@
-import Entity from './Entity';
+import Entity from './DealersEntity';
 
 // ViewMapper class is responsible for converting data into view-ready data directly used in components to display the data
 export default class ViewMapper {
