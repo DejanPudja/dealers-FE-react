@@ -14,7 +14,7 @@ table {
 td,
 th {
   padding-left: 8px;
-  min-width: 50px;
+  min-width: 100px;
 }
 thead tr {
   height: 60px;

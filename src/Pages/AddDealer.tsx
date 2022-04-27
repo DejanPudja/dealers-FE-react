@@ -1,5 +1,5 @@
 import React from 'react';
-import PartsFromFields from '../components/blocks/PartsFormFields';
+import PartsFromFields from '../components/blocks/PartsForm';
 
 export default function AddDealer() {
   return (

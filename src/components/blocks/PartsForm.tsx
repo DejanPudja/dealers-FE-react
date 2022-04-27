@@ -1,35 +1,54 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import Service from '../../domain/dealersCollection/Service';
-import PartsInputField from '../parts/PartsInputField';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Validation from '../../class/Validation';
+
 toast.configure();
-export default function PartsFromFields() {
+export default function PartsFrom() {
   // const arrayCaptions = ['Title', 'Address', 'Latitude', 'Longitude'];
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
   const [lat, setLatitude] = useState('');
   const [lng, setLongitude] = useState('');
 
+  const errorMessage = (message: any) => {
+    toast.error(message, {
+      position: toast.POSITION.TOP_LEFT,
+      autoClose: 2000,
+    });
+  };
+  const successMessage = (message: string) => {
+    toast.success(message, {
+      position: toast.POSITION.TOP_LEFT,
+      autoClose: 2000,
+    });
+  };
+
   const onSubmitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    await Service.addDealer({ title, address, lat, lng })
-      .then(() => {
-        toast.success('Success add dealer', {
-          position: toast.POSITION.TOP_LEFT,
-          autoClose: 2000,
+    let validateData = Validation.validationFields({
+      title,
+      address,
+      lat,
+      lng,
+    });
+
+    if (validateData === 'string') {
+      errorMessage(validateData);
+    } else {
+      await Service.addDealer(validateData)
+        .then(() => {
+          successMessage('Success add dealer');
+          setTitle('');
+          setAddress('');
+          setLatitude('');
+          setLongitude('');
+        })
+        .catch((err) => {
+          errorMessage('Error');
         });
-      })
-      .catch((err) => {
-        toast.error('Error', {
-          position: toast.POSITION.TOP_LEFT,
-          autoClose: 2000,
-        });
-      });
-    setTitle('');
-    setAddress('');
-    setLatitude('');
-    setLongitude('');
+    }
   };
   return (
     <div>
