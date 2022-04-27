@@ -1,4 +1,3 @@
-import React from 'react';
 interface Type {
   title: string;
   address: string;
@@ -12,13 +11,6 @@ export default class Validation {
   static longitudeValidation(lng: string) {
     return /^-?\d+[.]+\d+$/.test(lng);
   }
-  //   static validate({ title, address, lat, lng }: Type) {
-  //     if (title !== '' && address !== '' && lat !== '' && lng !== '') {
-  //       if (title.length < 5 && address.length < 5) {
-  //       }
-  //     }
-  //     return { title, address, lat, lng };
-  //   }
   static validationFields({ title, address, lat, lng }: Type) {
     if (
       title.length >= 5 &&

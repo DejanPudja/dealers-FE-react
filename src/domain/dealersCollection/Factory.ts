@@ -11,8 +11,8 @@ type DealersType = {
 export default class Factory {
   reconstitute(data: any) {
     const items: any = [];
-    if (data && data.length > 0) {
-      data.forEach((item: DealersType) => {
+    if (data.data && data.data.length > 0) {
+      data.data.forEach((item: DealersType) => {
         const taskInstance = this.makeEmpty();
 
         taskInstance

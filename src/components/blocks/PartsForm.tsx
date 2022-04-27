@@ -1,12 +1,14 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import Service from '../../domain/dealersCollection/Service';
+import Validation from '../../class/Validation';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Validation from '../../class/Validation';
 
 toast.configure();
 export default function PartsFrom() {
   // const arrayCaptions = ['Title', 'Address', 'Latitude', 'Longitude'];
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
   const [lat, setLatitude] = useState('');
@@ -21,7 +23,7 @@ export default function PartsFrom() {
   const successMessage = (message: string) => {
     toast.success(message, {
       position: toast.POSITION.TOP_LEFT,
-      autoClose: 2000,
+      autoClose: 3000,
     });
   };
 
@@ -34,20 +36,28 @@ export default function PartsFrom() {
       lng,
     });
 
-    if (validateData === 'string') {
+    if (typeof validateData !== 'object') {
       errorMessage(validateData);
     } else {
-      await Service.addDealer(validateData)
-        .then(() => {
-          successMessage('Success add dealer');
-          setTitle('');
-          setAddress('');
-          setLatitude('');
-          setLongitude('');
-        })
-        .catch((err) => {
-          errorMessage('Error');
-        });
+      // try {
+      const response = await Service.addDealer(validateData);
+      console.log(response);
+      // } catch (err) {
+      //   console.log(err);
+      // }
+
+      // successMessage('Success add dealer');
+      // setTitle('');
+      // setAddress('');
+      // setLatitude('');
+      // setLongitude('');
+      // navigate('/');
+
+      // .catch((err) => {
+      //   console.log(err);
+
+      //   // errorMessage('Error sending request');
+      // });
     }
   };
   return (
