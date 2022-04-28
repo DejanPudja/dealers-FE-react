@@ -1,3 +1,8 @@
+.spinner-form tr td img {
+  margin: 30vh auto;
+  display: flex;
+  justify-content: center;
+}
 .form-style-1 {
   margin: 20vh auto;
   max-width: 400px;

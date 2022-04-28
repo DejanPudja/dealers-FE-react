@@ -2,11 +2,11 @@ import { Routes, Route } from 'react-router-dom';
 import MainHeader from './components/main/MainHeader';
 import PartsNoMatch from './Pages/NoMatch';
 import Home from './Pages/Home';
-import './assets/style.css';
 import AddDealer from './Pages/AddDealer';
 import Contact from './Pages/Contact';
+import './assets/style.css';
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <MainHeader />
@@ -19,5 +19,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

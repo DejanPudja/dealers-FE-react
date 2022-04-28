@@ -11,11 +11,10 @@ export default function BlocksListItems({ dealers }: Props) {
   const deleteDealer = async () => {
     try {
       await Service.deleteDealer(dealers.id).then((response) => {
-        console.log(response.data.message);
         ToastNotify.successMessage(`${response.data.message} ` + dealers.title);
       });
-    } catch (err) {
-      ToastNotify.errorMessage(err);
+    } catch (err: any) {
+      ToastNotify.errorMessage(err.response.data.message);
     }
   };
   const editDealer = () => {};
