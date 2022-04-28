@@ -5,6 +5,7 @@ import Home from './Pages/Home';
 import AddDealer from './Pages/AddDealer';
 import Contact from './Pages/Contact';
 import './assets/style.css';
+import EditDealer from './Pages/EditDealer';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<AddDealer />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/edit/:id" element={<EditDealer />} />
         <Route path="*" element={<PartsNoMatch />} />
       </Routes>
     </div>

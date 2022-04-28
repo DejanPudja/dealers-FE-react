@@ -15,8 +15,6 @@ export default function PartsPagination() {
         1
       </a>
       <button onClick={next}>&raquo;</button>
-
-      {/* <a href="#">&raquo;</a> */}
     </div>
   );
 }

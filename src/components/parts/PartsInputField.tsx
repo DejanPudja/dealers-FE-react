@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function PartsInputField({ captions }: any) {
   return (
     <li>

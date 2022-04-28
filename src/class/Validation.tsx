@@ -9,9 +9,9 @@ export default class Validation {
     return /^\d+[.]+\d+$/.test(lat);
   }
   static longitudeValidation(lng: string) {
-    return /^-?\d+[.]+\d+$/.test(lng);
+    return /^-\d+[.]+\d+$/.test(lng);
   }
-  static validationFieldsAddDealer({ title, address, lat, lng }: Type) {
+  static validateAddDealerFormFields({ title, address, lat, lng }: Type) {
     if (
       title.length >= 5 &&
       address.length >= 5 &&

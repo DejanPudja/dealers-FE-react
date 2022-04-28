@@ -12,9 +12,9 @@ export default function PartsDealerForm() {
   const [lng, setLongitude] = useState('');
   const [isLoading, setLoading] = useState(false);
 
-  const onSubmitHandler = async (event: FormEvent) => {
+  const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
-    let validateData = Validation.validationFieldsAddDealer({
+    let validateData = Validation.validateAddDealerFormFields({
       title,
       address,
       lat,
@@ -26,7 +26,7 @@ export default function PartsDealerForm() {
     } else {
       try {
         setLoading(true);
-        await Service.addDealer(validateData).then((response) => {
+        Service.addDealer(validateData).then((response) => {
           ToastNotify.successMessage(response.data.message);
           setTitle('');
           setAddress('');
@@ -35,7 +35,6 @@ export default function PartsDealerForm() {
           setLoading(false);
         });
       } catch (err: any) {
-        console.log(err.response.data.message);
         ToastNotify.errorMessage(err.response.data.message);
       }
     }

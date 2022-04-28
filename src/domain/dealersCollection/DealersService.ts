@@ -12,4 +12,10 @@ export default class Service {
   static addDealer(data: any) {
     return new Gateway().addDealer(data);
   }
+  static getDealerById(id: any) {
+    return new Gateway().getDealerById(id);
+  }
+  static editDealer(data: any) {
+    return new Gateway().editDealer(data);
+  }
 }

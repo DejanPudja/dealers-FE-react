@@ -1,10 +1,9 @@
 import Entity from './DealersEntity';
 
-// ViewMapper class is responsible for converting data into view-ready data directly used in components to display the data
 export default class ViewMapper {
   static map(dealers: Array<Entity>) {
     if (dealers === undefined) return [];
-    return dealers.map((dealer: Entity, index: number) => {
+    return dealers.map((dealer: Entity) => {
       return {
         id: dealer.id,
         title: dealer.title,

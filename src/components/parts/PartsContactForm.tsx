@@ -8,14 +8,14 @@ export default function PartsContactForm() {
   const [message, setMessage] = useState('');
   const [isLoading, setLoading] = useState(false);
 
-  const onSubmitHandler = async (event: FormEvent) => {
+  const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     let value = { email, message };
 
     if (email !== '' && message !== '') {
       try {
         setLoading(true);
-        await ContactService.sendEmail(value).then((response) => {
+        ContactService.sendEmail(value).then((response) => {
           ToastNotify.successMessage(response.data.message);
           setEmail('');
           setMessage('');

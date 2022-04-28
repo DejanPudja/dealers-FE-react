@@ -10,14 +10,10 @@ export default function BlocksList() {
   const [isLoading, setLoading] = useState(true);
 
   const fetchDealers = async () => {
-    try {
-      const dealers = await Service.getAll(1);
-      const mappedDealers = ViewMapper.map(dealers);
-      setDealers(mappedDealers);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    const dealers = await Service.getAll(1);
+    const mappedDealers = ViewMapper.map(dealers);
+    setDealers(mappedDealers);
+    setLoading(false);
   };
   useEffect(() => {
     fetchDealers();
@@ -45,7 +41,13 @@ export default function BlocksList() {
       <tbody>
         {!isLoading
           ? dealers.map((dealer: any, index: number) => {
-              return <BlocksListItem dealers={dealer} key={index} />;
+              return (
+                <BlocksListItem
+                  dealers={dealer}
+                  key={index}
+                  fetchDealers={fetchDealers}
+                />
+              );
             })
           : Spinner.tableSpinner()}
       </tbody>
