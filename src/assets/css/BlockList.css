@@ -1,5 +1,7 @@
 .spinner-table {
-  margin: 40px 270%;
+  margin: 4vh 280%;
+  display: flex;
+  justify-content: center;
 }
 table {
   border-spacing: 1;

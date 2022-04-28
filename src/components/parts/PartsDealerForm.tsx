@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import Service from '../../domain/dealersCollection/DealersService';
 import Validation from '../../class/Validation';
 import ToastNotify from '../../class/ToastNotify';
-import PartsSpinner from './PartsSpinner';
+import Spinner from '../../class/Spinner';
 
 export default function PartsDealerForm() {
   // const arrayCaptions = ['Title', 'Address', 'Latitude', 'Longitude'];
@@ -104,7 +104,7 @@ export default function PartsDealerForm() {
           </li> */}
           </ul>
         ) : (
-          <PartsSpinner className={'spinner-form'} />
+          Spinner.formSpinner()
         )}
       </form>
     </div>
