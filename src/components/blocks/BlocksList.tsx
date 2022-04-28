@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Service from '../../domain/dealersCollection/DealersService';
 import ViewMapper from '../../domain/dealersCollection/DealersViewMapper';
 import BlocksListItem from './BlocksListItem';
-import PartsSpinner from '../parts/PartsSpinner';
+import Spinner from '../../class/Spinner';
 import PartsPagination from '../parts/PartsPagination';
 
 export default function BlocksList() {
@@ -43,13 +43,11 @@ export default function BlocksList() {
         </tr>
       </thead>
       <tbody>
-        {!isLoading ? (
-          dealers.map((dealer: any, index: number) => {
-            return <BlocksListItem dealers={dealer} key={index} />;
-          })
-        ) : (
-          <PartsSpinner className={'spinner-table'} />
-        )}
+        {!isLoading
+          ? dealers.map((dealer: any, index: number) => {
+              return <BlocksListItem dealers={dealer} key={index} />;
+            })
+          : Spinner.tableSpinner()}
       </tbody>
     </table>
   );

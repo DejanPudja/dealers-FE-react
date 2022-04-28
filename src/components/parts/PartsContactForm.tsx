@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import ContactService from '../../domain/contactForm/ContactService';
 import ToastNotify from '../../class/ToastNotify';
-import PartsSpinner from '../parts/PartsSpinner';
+import Spinner from '../../class/Spinner';
 
 export default function PartsContactForm() {
   const [email, setEmail] = useState('');
@@ -63,7 +63,7 @@ export default function PartsContactForm() {
           </li>
         </ul>
       ) : (
-        <PartsSpinner className={'spinner-form'} />
+        Spinner.formSpinner()
       )}
     </form>
   );
