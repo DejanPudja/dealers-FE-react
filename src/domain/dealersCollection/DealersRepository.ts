@@ -1,5 +1,5 @@
-import Gateway from './Gateway';
-import Factory from './Factory';
+import Gateway from './DealersGateway';
+import Factory from './DealersFactory';
 
 export default class Repository {
   _gateway: Gateway;

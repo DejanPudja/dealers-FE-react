@@ -1,10 +1,10 @@
 import React from 'react';
-import PartsFromFields from '../components/blocks/PartsForm';
+import PartsDealerForm from '../components/parts/PartsDealerForm';
 
 export default function AddDealer() {
   return (
     <div>
-      <PartsFromFields />
+      <PartsDealerForm />
     </div>
   );
 }

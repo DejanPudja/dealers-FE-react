@@ -8,7 +8,7 @@ export default class Gateway {
   async deleteDealer(id: number) {
     return await ApiClient.delete(`/api/dealer/delete/${id}`);
   }
-  async addDealer(data: any) {
-    return await ApiClient.post(`/api/dealer/add`, data);
+  addDealer(data: any) {
+    return ApiClient.post(`/api/dealer/add`, data);
   }
 }

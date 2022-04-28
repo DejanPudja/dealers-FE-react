@@ -1,52 +1,41 @@
-import React, { FormEvent, useEffect, useState } from 'react';
-import Service from '../../domain/dealersCollection/Service';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { FormEvent, useState } from 'react';
+import Service from '../../domain/dealersCollection/DealersService';
 import Validation from '../../class/Validation';
+import { useNavigate } from 'react-router-dom';
+import ToastNotify from '../../class/ToastNotify';
 
-toast.configure();
-export default function PartsFrom() {
+export default function PartsDealerForm() {
   // const arrayCaptions = ['Title', 'Address', 'Latitude', 'Longitude'];
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
   const [lat, setLatitude] = useState('');
   const [lng, setLongitude] = useState('');
 
-  const errorMessage = (message: any) => {
-    toast.error(message, {
-      position: toast.POSITION.TOP_LEFT,
-      autoClose: 2000,
-    });
-  };
-  const successMessage = (message: string) => {
-    toast.success(message, {
-      position: toast.POSITION.TOP_LEFT,
-      autoClose: 2000,
-    });
-  };
-
   const onSubmitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    let validateData = Validation.validationFields({
+    let validateData = Validation.validationFieldsAddDealer({
       title,
       address,
       lat,
       lng,
     });
 
-    if (validateData === 'string') {
-      errorMessage(validateData);
+    if (typeof validateData !== 'object') {
+      ToastNotify.errorMessage(validateData);
     } else {
       await Service.addDealer(validateData)
-        .then(() => {
-          successMessage('Success add dealer');
+        .then((response) => {
+          ToastNotify.successMessage(response.data.message);
           setTitle('');
           setAddress('');
           setLatitude('');
           setLongitude('');
+          navigate('/');
         })
         .catch((err) => {
-          errorMessage('Error');
+          console.log(err);
+          ToastNotify.errorMessage('Error sending request');
         });
     }
   };

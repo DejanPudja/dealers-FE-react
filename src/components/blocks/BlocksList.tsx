@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Service from '../../domain/dealersCollection/Service';
-import ViewMapper from '../../domain/dealersCollection/ViewMapper';
+import Service from '../../domain/dealersCollection/DealersService';
+import ViewMapper from '../../domain/dealersCollection/DealersViewMapper';
 import BlocksListItem from './BlocksListItem';
 import PartsPagination from '../parts/PartsPagination';
 
