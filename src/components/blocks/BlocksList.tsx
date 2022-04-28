@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Service from '../../domain/dealersCollection/DealersService';
 import ViewMapper from '../../domain/dealersCollection/DealersViewMapper';
 import BlocksListItem from './BlocksListItem';
+import PartsSpinner from '../parts/PartsSpinner';
 import PartsPagination from '../parts/PartsPagination';
 
 export default function BlocksList() {
   const [dealers, setDealers] = useState<any>([]);
+  const [isLoading, setLoading] = useState(true);
 
   const fetchDealers = async () => {
-    const dealers = await Service.getAll(1);
-    const mappedDealers = ViewMapper.map(dealers);
-
-    setDealers(mappedDealers);
+    try {
+      const dealers = await Service.getAll(1);
+      const mappedDealers = ViewMapper.map(dealers);
+      setDealers(mappedDealers);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
   useEffect(() => {
     fetchDealers();
   }, []);
@@ -38,9 +43,13 @@ export default function BlocksList() {
         </tr>
       </thead>
       <tbody>
-        {dealers.map((dealer: any, index: number) => {
-          return <BlocksListItem dealers={dealer} key={index} />;
-        })}
+        {!isLoading ? (
+          dealers.map((dealer: any, index: number) => {
+            return <BlocksListItem dealers={dealer} key={index} />;
+          })
+        ) : (
+          <PartsSpinner className={'spinner-table'} />
+        )}
       </tbody>
     </table>
   );

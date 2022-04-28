@@ -14,9 +14,9 @@ export default class Validation {
   static validationFieldsAddDealer({ title, address, lat, lng }: Type) {
     if (
       title.length >= 5 &&
-      address.length > 5 &&
+      address.length >= 5 &&
       lat.length >= 5 &&
-      lng.length > 5
+      lng.length >= 5
     ) {
       if (Validation.latitudeValidation(lat)) {
         if (Validation.longitudeValidation(lng)) {

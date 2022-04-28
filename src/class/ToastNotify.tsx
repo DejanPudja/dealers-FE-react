@@ -1,7 +1,7 @@
-import React from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 export default class ToastNotify {
   static errorMessage = (message: any) => {
     toast.error(message, {
