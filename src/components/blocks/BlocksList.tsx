@@ -24,8 +24,8 @@ export default function BlocksList() {
 
   const handlePageClick = async (data: any) => {
     let currentPage = data.selected + 1;
-    setCurrentPage(currentPage);
     await fetchDealers(currentPage);
+    setCurrentPage(currentPage);
   };
   return (
     <div>

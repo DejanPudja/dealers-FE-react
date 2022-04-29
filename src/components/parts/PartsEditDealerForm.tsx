@@ -42,7 +42,7 @@ export default function PartsEditDealerForm() {
       await Service.editDealer(data)
         .then((response) => {
           ToastNotify.successMessage(response.data.message);
-          navigate('/');
+          navigate(-1);
         })
         .catch((err) => {
           ToastNotify.errorMessage(err.response.data.message);

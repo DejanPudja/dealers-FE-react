@@ -4,6 +4,12 @@ interface Type {
   lat: string;
   lng: string;
 }
+interface UserType {
+  name: string;
+  email: string;
+  password: any;
+  password_confirmation: any;
+}
 export default class Validation {
   static latitudeValidation(lat: string) {
     return /^\d+[.]+\d+$/.test(lat);
@@ -29,6 +35,22 @@ export default class Validation {
       }
     } else {
       return 'All fields must be longer than 5 characters!';
+    }
+  }
+  static userValidation({
+    name,
+    email,
+    password,
+    password_confirmation,
+  }: UserType) {
+    if (name.length >= 3) {
+      if (password == password_confirmation) {
+        return { name, email, password, password_confirmation };
+      } else {
+        return 'Fields password and confirmPassword is not a same!';
+      }
+    } else {
+      return 'Field name must be longer than 3 characters!';
     }
   }
 }
