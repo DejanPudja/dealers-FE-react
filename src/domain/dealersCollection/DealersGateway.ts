@@ -3,7 +3,9 @@ import ApiClient from '../../utils/http/ApiClient';
 export default class Gateway {
   async getAll(page: number) {
     let api = await ApiClient.get(`/api/dealers?page=${page}`);
-    return api.data.data;
+    let data = api.data.data;
+    let lastPage = api.data.data.last_page;
+    return { data, lastPage };
   }
   async deleteDealer(id: number) {
     return await ApiClient.delete(`/api/dealer/delete/${id}`);
