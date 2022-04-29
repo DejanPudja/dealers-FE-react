@@ -1,19 +1,19 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ToastNotify from '../class/ToastNotify';
-import Validation from '../class/Validation';
-import Service from '../domain/dealersCollection/DealersService';
+import ToastNotify from '../../class/ToastNotify';
+import Validation from '../../class/Validation';
+import Service from '../../domain/dealersCollection/DealersService';
 
-export default function EditDealer() {
+export default function PartsEditDealerForm() {
   const navigate = useNavigate();
+  const params = useParams();
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
   const [lat, setLatitude] = useState('');
   const [lng, setLongitude] = useState('');
-  const params = useParams();
 
-  const fetch = async () => {
+  const getDealer = async () => {
     let dealer = await Service.getDealerById(params.id);
     setId(dealer.id);
     setTitle(dealer.title);
@@ -23,7 +23,7 @@ export default function EditDealer() {
   };
 
   useEffect(() => {
-    fetch();
+    getDealer();
   }, []);
 
   const onSubmitHandler = async (event: FormEvent) => {

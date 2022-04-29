@@ -11,23 +11,27 @@ type DealersType = {
 export default class Factory {
   reconstitute(data: any) {
     const items: any = [];
-    if (data.data && data.data.length > 0) {
-      data.data.forEach((item: DealersType) => {
+    const lastPage: number = data.lastPage;
+
+    if (data.data.data && data.data.data.length > 0) {
+      data.data.data.forEach((data: DealersType) => {
         const taskInstance = this.makeEmpty();
 
         taskInstance
-          .setId(item.id)
-          .setTitle(item.title)
-          .setAddress(item.address)
-          .setLatitude(item.lat)
-          .setLongitude(item.lng);
+          .setId(data.id)
+          .setTitle(data.title)
+          .setAddress(data.address)
+          .setLatitude(data.lat)
+          .setLongitude(data.lng);
         items.push(taskInstance);
       });
 
-      return items;
+      return { items, lastPage };
     }
   }
   makeFromForm(data: any) {
+    console.log(data);
+
     return data.data;
   }
   makeEmpty() {

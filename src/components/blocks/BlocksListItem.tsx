@@ -4,24 +4,27 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import Service from '../../domain/dealersCollection/DealersService';
 import ToastNotify from '../../class/ToastNotify';
 import { useNavigate } from 'react-router-dom';
-import EditDealer from '../../Pages/EditDealer';
 
 interface Props {
   dealers: any;
   fetchDealers: any;
+  currentPage: number;
 }
-export default function BlocksListItem({ dealers, fetchDealers }: Props) {
+export default function BlocksListItem({
+  dealers,
+  fetchDealers,
+  currentPage,
+}: Props) {
   const navigate = useNavigate();
 
   const deleteDealer = async () => {
     await Service.deleteDealer(dealers.id)
       .then((response) => {
-        fetchDealers();
+        fetchDealers(currentPage);
         ToastNotify.successMessage(`${response.data.message} ` + dealers.title);
       })
       .catch((err: any) => {
-        console.log(err);
-        // ToastNotify.errorMessage(err.response.data.message);
+        ToastNotify.errorMessage(err.response.data.message);
       });
   };
 
