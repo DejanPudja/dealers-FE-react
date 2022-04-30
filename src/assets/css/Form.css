@@ -28,6 +28,7 @@ textarea {
 }
 .form-style-1 input[type='text'],
 input[type='email'],
+input[type='password'],
 textarea {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -39,6 +40,7 @@ textarea {
 }
 .form-style-1 input[type='text']:focus,
 input[type='email']:focus,
+input[type='password']:focus,
 textarea:focus {
   -moz-box-shadow: 0 0 8px #88d5e9;
   -webkit-box-shadow: 0 0 8px #88d5e9;

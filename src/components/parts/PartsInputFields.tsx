@@ -1,59 +1,37 @@
-export default function PartsInputFields() {
+interface Props {
+  label:
+    | 'Title'
+    | 'Address'
+    | 'Latitude'
+    | 'Longitude'
+    | 'Name'
+    | 'Email'
+    | 'Password'
+    | 'Confirm Password';
+  className: 'field-long';
+  type: 'text' | 'email' | 'password';
+  value: string | number;
+  onChange: any;
+}
+export default function PartsInputFields({
+  label,
+  type,
+  value,
+  className,
+  onChange,
+}: Props) {
   return (
-    <form>
-      {/* <ul className="form-style-1">
-        <li>
-          <label>Title</label>
-          <input
-            type="text"
-            name="title"
-            value={title}
-            className="field-long"
-            onChange={(event) => {
-              setTitle(event.target.value);
-            }}
-          />
-        </li>
-        <li>
-          <label>Adress</label>
-          <input
-            type="text"
-            name="address"
-            value={address}
-            className="field-long"
-            onChange={(event) => {
-              setAddress(event.target.value);
-            }}
-          />
-        </li>
-        <li>
-          <label>Latitude</label>
-          <input
-            type="text"
-            name="latitude"
-            value={lat}
-            className="field-long"
-            onChange={(event) => {
-              setLatitude(event.target.value);
-            }}
-          />
-        </li>
-        <li>
-          <label>Longitude</label>
-          <input
-            type="text"
-            name="longitude"
-            value={lng}
-            className="field-long"
-            onChange={(event) => {
-              setLongitude(event.target.value);
-            }}
-          />
-        </li>
-        <li>
-          <input type="submit" value="Update" onClick={onSubmitHandler} />
-        </li>
-      </ul> */}
-    </form>
+    <li>
+      <label>{label}</label>
+      <input
+        type={type}
+        name={type}
+        value={value}
+        className={className}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(event.target.value);
+        }}
+      />
+    </li>
   );
 }

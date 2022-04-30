@@ -1,4 +1,4 @@
-import BlocksList from '../components/blocks/BlocksList';
+import BlocksList from '../components/blocks/list/BlocksList';
 
 export default function Home() {
   return (

@@ -10,6 +10,7 @@ nav {
   color: #ffff;
 }
 nav a {
+  margin-top: 15px;
   color: #ffff;
   text-decoration: none;
   border: 1px solid #fff;
@@ -19,7 +20,7 @@ nav .active {
   background-color: rgb(47, 27, 230);
 }
 .nav-links {
-  width: 22%;
+  width: 35%;
   display: flex;
   justify-content: space-around;
   align-items: center;
