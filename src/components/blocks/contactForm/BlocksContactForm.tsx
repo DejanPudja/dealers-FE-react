@@ -1,9 +1,10 @@
 import { FormEvent, useState } from 'react';
-import ContactService from '../../domain/contactForm/ContactService';
-import ToastNotify from '../../class/ToastNotify';
-import Spinner from '../../class/Spinner';
+import ToastNotify from '../../../class/ToastNotify';
+import Spinner from '../../../class/Spinner';
+import ContactService from '../../../domain/contactForm/ContactService';
+import PartsInputFields from '../../parts/PartsInputFields';
 
-export default function PartsContactForm() {
+export default function BlocksContactForm() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -13,18 +14,18 @@ export default function PartsContactForm() {
     let value = { email, message };
 
     if (email !== '' && message !== '') {
-      try {
-        setLoading(true);
-        ContactService.sendEmail(value).then((response) => {
+      setLoading(true);
+      ContactService.sendEmail(value)
+        .then((response) => {
           ToastNotify.successMessage(response.data.message);
           setEmail('');
           setMessage('');
           setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          ToastNotify.errorMessage('Error sending request');
         });
-      } catch (err) {
-        console.log(err);
-        ToastNotify.errorMessage('Error sending request');
-      }
     } else {
       ToastNotify.errorMessage('All fields must be fill');
     }
@@ -34,18 +35,15 @@ export default function PartsContactForm() {
     <form>
       {!isLoading ? (
         <ul className="form-style-1">
-          <li>
-            <label>Email</label>
-            <input
-              type="email"
-              name="title"
-              className="field-long"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-            />
-          </li>
+          <PartsInputFields
+            label={'Email'}
+            type={'email'}
+            value={email}
+            className={'field-long'}
+            onChange={(emailValue: string) => {
+              setEmail(emailValue);
+            }}
+          />
           <li>
             <label>Message</label>
             <textarea
@@ -57,7 +55,6 @@ export default function PartsContactForm() {
               }}
             />
           </li>
-
           <li>
             <input type="submit" value="Submit" onClick={onSubmitHandler} />
           </li>

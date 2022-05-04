@@ -1,10 +1,10 @@
-interface Type {
+interface FormDealers {
   title: string;
   address: string;
   lat: string;
   lng: string;
 }
-interface UserType {
+interface Register {
   name: string;
   email: string;
   password: any;
@@ -17,7 +17,15 @@ export default class Validation {
   static longitudeValidation(lng: string) {
     return /^-\d+[.]+\d+$/.test(lng);
   }
-  static validateAddDealerFormFields({ title, address, lat, lng }: Type) {
+  static emailValidation(email: string) {
+    return /^[a-zA-Z0-9._-]+@[a-zA.-]+\.[a-zA-Z]{2,4}$/.test(email);
+  }
+  static validateAddDealerFormFields({
+    title,
+    address,
+    lat,
+    lng,
+  }: FormDealers) {
     if (
       title.length >= 5 &&
       address.length >= 5 &&
@@ -37,20 +45,28 @@ export default class Validation {
       return 'All fields must be longer than 5 characters!';
     }
   }
-  static userValidation({
+  static registerValidation({
     name,
     email,
     password,
     password_confirmation,
-  }: UserType) {
-    if (name.length >= 3) {
-      if (password == password_confirmation) {
-        return { name, email, password, password_confirmation };
+  }: Register) {
+    if (name && email && password) {
+      if (name.charAt(0) === name.charAt(0).toUpperCase() && name.length >= 3) {
+        if (Validation.emailValidation(email)) {
+          if (password == password_confirmation) {
+            return { name, email, password, password_confirmation };
+          } else {
+            return 'Fields password and confirmPassword is not a same!';
+          }
+        } else {
+          return 'Email address is not a valid';
+        }
       } else {
-        return 'Fields password and confirmPassword is not a same!';
+        return 'Field name must be longer than 3 characters and first letter must be uppercase!';
       }
     } else {
-      return 'Field name must be longer than 3 characters!';
+      return 'All fields must be fill!';
     }
   }
 }

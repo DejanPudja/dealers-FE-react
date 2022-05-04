@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import Service from '../../domain/dealersCollection/DealersService';
-import ToastNotify from '../../class/ToastNotify';
+import Service from '../../../domain/dealersCollection/DealersService';
+import ToastNotify from '../../../class/ToastNotify';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
@@ -17,8 +17,8 @@ export default function BlocksListItem({
 }: Props) {
   const navigate = useNavigate();
 
-  const deleteDealer = async () => {
-    await Service.deleteDealer(dealers.id)
+  const deleteDealer = () => {
+    Service.deleteDealer(dealers.id)
       .then((response) => {
         fetchDealers(currentPage);
         ToastNotify.successMessage(`${response.data.message} ` + dealers.title);
@@ -27,7 +27,6 @@ export default function BlocksListItem({
         ToastNotify.errorMessage(err.response.data.message);
       });
   };
-
   const editDealer = () => {
     navigate(`/edit/${dealers.id}`);
   };
