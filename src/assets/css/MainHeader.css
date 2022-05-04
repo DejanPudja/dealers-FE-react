@@ -10,6 +10,8 @@ nav {
   color: #ffff;
 }
 nav a {
+  margin-top: 15px;
+  margin-right: 10px;
   color: #ffff;
   text-decoration: none;
   border: 1px solid #fff;
@@ -19,8 +21,7 @@ nav .active {
   background-color: rgb(47, 27, 230);
 }
 .nav-links {
-  width: 22%;
-  display: flex;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
   list-style: none;
@@ -39,4 +40,14 @@ nav .active {
 }
 .search {
   margin-top: 40px;
+}
+.logout {
+  float: right;
+  border: none;
+  background-color: rgb(11, 11, 83);
+  color: #ffff;
+  margin-right: 10px;
+}
+.logout:hover {
+  transform: scale(1.02);
 }

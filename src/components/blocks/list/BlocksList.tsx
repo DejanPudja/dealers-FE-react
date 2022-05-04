@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Service from '../../domain/dealersCollection/DealersService';
-import ViewMapper from '../../domain/dealersCollection/DealersViewMapper';
+import Service from '../../../domain/dealersCollection/DealersService';
+import ViewMapper from '../../../domain/dealersCollection/DealersViewMapper';
 import BlocksListItem from './BlocksListItem';
-import Spinner from '../../class/Spinner';
+import Spinner from '../../../class/Spinner';
 import ReactPaginate from 'react-paginate';
 
 export default function BlocksList() {
@@ -12,7 +12,9 @@ export default function BlocksList() {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const fetchDealers = async (currentPage: number) => {
-    const dealers = await Service.getAll(currentPage);
+    const dealers = await Service.getAll(currentPage).catch(() => {
+      window.location.reload();
+    });
     const mappedDealers = ViewMapper.map(dealers?.items);
     setPageCount(dealers?.lastPage);
     setDealers(mappedDealers);
@@ -24,8 +26,8 @@ export default function BlocksList() {
 
   const handlePageClick = async (data: any) => {
     let currentPage = data.selected + 1;
-    setCurrentPage(currentPage);
     await fetchDealers(currentPage);
+    setCurrentPage(currentPage);
   };
   return (
     <div>
