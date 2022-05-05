@@ -31,8 +31,8 @@ export default function PartsEditDealerForm() {
           setStates(response);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        navigate('*');
       });
   };
   useEffect(() => {
